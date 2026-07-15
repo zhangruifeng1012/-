@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>趋势分析 - 智能招标信息采集系统</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-sm">智</div>
+            <div class="logo-text">智招云</div>
+        </div>
+        <nav class="nav-menu">
+            <a href="/dashboard" class="nav-item"><span class="nav-icon">●</span>控制台</a>
+            <a href="/list" class="nav-item"><span class="nav-icon">≡</span>招标列表</a>
+            <a href="/analysis" class="nav-item active"><span class="nav-icon">◈</span>趋势分析</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="logout-btn">退出登录</a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="page-title">行业趋势图表 - Echarts可视化</div>
+            <div class="user-info">欢迎，{{ session.user.username }}</div>
+        </header>
+
+        <div class="analysis-grid">
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3>近30天发布趋势</h3>
+                    <span class="card-desc" id="chart1Tag">加载中...</span>
+                </div>
+                <div class="card-body">
+                    <div id="trendChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3>地区分布图</h3>
+                    <span class="card-desc" id="chart2Tag">加载中...</span>
+                </div>
+                <div class="card-body">
+                    <div id="regionChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3>行业占比分析</h3>
+                    <span class="card-desc" id="chart3Tag">加载中...</span>
+                </div>
+                <div class="card-body">
+                    <div id="industryChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3>高频关键词词云 (pyLDAvis主题分析)</h3>
+                    <span class="card-desc" id="chart4Tag">加载中...</span>
+                </div>
+                <div class="card-body">
+                    <div id="keywordChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <div class="card chart-card full-width">
+                <div class="card-header">
+                    <h3>各地区行业预算热力图</h3>
+                    <span class="card-desc">鼠标悬停查看详情</span>
+                </div>
+                <div class="card-body">
+                    <div id="heatmapChart" class="chart-container-large"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="/static/js/analysis.js"></script>
+</body>
+</html>
