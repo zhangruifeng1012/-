@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能招标信息采集系统 - 登录</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="login-page">
+<div class="login-container">
+    <div class="login-header">
+        <div class="logo">智招云</div>
+        <h1>智能招标信息采集系统</h1>
+        <p>基于爬虫技术与文本分析的一站式招标信息平台</p>
+    </div>
+    <form class="login-form" id="loginForm">
+        <div class="form-group">
+            <label>用户名</label>
+            <input type="text" name="username" id="username" placeholder="请输入用户名" required>
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            <input type="password" name="password" id="password" placeholder="请输入密码" required>
+        </div>
+        <div class="form-message" id="formMessage"></div>
+        <button type="submit" class="btn-login">登录 / 注册</button>
+        <p class="login-tip">提示：首次使用将自动创建账户</p>
+    </form>
+    <div class="login-footer">
+        <span>基于 Python 爬虫 & 文本分析算法</span>
+    </div>
+</div>
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const msg = document.getElementById('formMessage');
+    if (!username || !password) {
+        msg.textContent = '用户名和密码不能为空';
+        msg.className = 'form-message error';
+        return;
+    }
+    msg.textContent = '正在登录...';
+    msg.className = 'form-message';
+    fetch('/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username: username, password: password})
+    }).then(r => r.json()).then(data => {
+        if (data.success) {
+            msg.textContent = data.message;
+            msg.className = 'form-message success';
+            setTimeout(() => { window.location.href = data.redirect; }, 500);
+        } else {
+            msg.textContent = data.message;
+            msg.className = 'form-message error';
+        }
+    }).catch(() => {
+        msg.textContent = '网络错误，请重试';
+        msg.className = 'form-message error';
+    });
+});
+</script>
+</body>
+</html>

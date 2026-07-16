@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详情页 - 智能招标信息采集系统</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-sm">智</div>
+            <div class="logo-text">智招云</div>
+        </div>
+        <nav class="nav-menu">
+            <a href="/dashboard" class="nav-item"><span class="nav-icon">●</span>控制台</a>
+            <a href="/list" class="nav-item active"><span class="nav-icon">≡</span>招标列表</a>
+            <a href="/analysis" class="nav-item"><span class="nav-icon">◈</span>趋势分析</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="logout-btn">退出登录</a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="page-title">招标详情</div>
+            <div class="user-info"><a href="/list">← 返回列表</a></div>
+        </header>
+        {% if item %}
+        <div class="card">
+            <div class="card-header">
+                <h3>{{ item.title }}</h3>
+                <span class="card-desc">发布日期: {{ item.publish_date }}</span>
+            </div>
+            <div class="card-body">
+                <div class="detail-info">
+                    <div class="info-row"><span class="info-label">地区：</span><span class="info-value">{{ item.region }}</span></div>
+                    <div class="info-row"><span class="info-label">行业：</span><span class="info-value">{{ item.industry }}</span></div>
+                    <div class="info-row"><span class="info-label">来源：</span><span class="info-value">{{ item.source }}</span></div>
+                    <div class="info-row"><span class="info-label">预算金额：</span><span class="info-value">{{ item.budget }} 万元</span></div>
+                    <div class="info-row"><span class="info-label">关键词：</span><span class="info-value">{{ item.keywords }}</span></div>
+                    <div class="info-row"><span class="info-label">原始链接：</span><span class="info-value">{{ item.url }}</span></div>
+                </div>
+                <div class="detail-content">
+                    <h4>内容详情</h4>
+                    <p>{{ item.content }}</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="card"><div class="card-body"><p class="empty-cell">未找到该条记录</p></div></div>
+        {% endif %}
+    </main>
+</div>
+</body>
+</html>
